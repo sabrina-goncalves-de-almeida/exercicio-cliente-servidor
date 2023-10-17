@@ -1,3 +1,7 @@
+# - Adicione a tag <nome> do utilizador em cada mensagem enviada
+# - Uma opção para sair do programa
+# - Após enviar a mensagem automaticamente limpar a tela e exibir toda a conversa novamente
+
 import requests
 
 SERVIDOR_URL = 'http://127.0.0.1:5555'
