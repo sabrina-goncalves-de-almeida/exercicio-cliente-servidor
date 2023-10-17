@@ -23,8 +23,8 @@ def receber_mensagens():
     for msg in mensagens:
         print(f"- {msg}")
 
-def texto_estilizado():
-    text = Text("Escolha uma opção")
+def estiliza_texto(texto):
+    text = Text(texto)
     text.stylize("bold white on #054f77")
     return text
 
@@ -36,7 +36,7 @@ if __name__ == '__main__':
         console.print("2. Receber mensagens", style="bold white on #054f77", justify="center")
         console.print("3. Sair", style="bold white on #054f77", justify="center")
         print("\n\n")
-        escolha = Prompt.ask(texto_estilizado())
+        escolha = Prompt.ask(estiliza_texto("Escolha uma opção"))
         
         if escolha == '1':
             enviar_mensagem()
