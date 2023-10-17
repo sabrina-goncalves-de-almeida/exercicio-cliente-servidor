@@ -8,7 +8,6 @@ from rich.prompt import Prompt
 from rich.text import Text
 
 console = Console()
-console.print("Terminal", "Root", style="#ccc010 bold")
 
 SERVIDOR_URL = 'http://127.0.0.1:5555'
 
