@@ -1,5 +1,5 @@
 # - Adicione a tag <nome> do utilizador em cada mensagem enviada
-# - Uma opção para sair do programa
+# OK - Uma opção para sair do programa
 # - Após enviar a mensagem automaticamente limpar a tela e exibir toda a conversa novamente
 
 import requests
@@ -22,11 +22,15 @@ if __name__ == '__main__':
     while True:
         print("1. Enviar mensagem")
         print("2. Receber mensagens")
+        print("3. Sair")
         escolha = input("Escolha uma opção: ")
         
         if escolha == '1':
             enviar_mensagem()
         elif escolha == '2':
             receber_mensagens()
+        elif escolha == '3':
+            print("Até mais, tenha um ótimo dia.")
+            break
         else:
             print("Opção inválida.")
