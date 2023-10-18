@@ -1,8 +1,9 @@
 # - Adicione a tag <nome> do utilizador em cada mensagem enviada
 # OK - Uma opção para sair do programa
-# - Após enviar a mensagem automaticamente limpar a tela e exibir toda a conversa novamente
+# OK - Após enviar a mensagem automaticamente limpar a tela e exibir toda a conversa novamente
 
 import requests
+import os
 from rich.console import Console
 from rich.prompt import Prompt
 from rich.text import Text
@@ -11,35 +12,40 @@ console = Console()
 
 SERVIDOR_URL = 'http://127.0.0.1:5555'
 
+estilo_texto = "bold white on #054f77"
+
 def enviar_mensagem():
-    msg = input("Digite sua mensagem: ")
+    msg = Prompt.ask(estiliza_texto("Digite sua mensagem"))
     resposta = requests.post(f'{SERVIDOR_URL}/enviar', json={'mensagem': msg})
     print(resposta.json()['status'])
 
 def receber_mensagens():
     resposta = requests.get(f'{SERVIDOR_URL}/receber')
     mensagens = resposta.json()['mensagens']
+    nome = requests.get(f'{SERVIDOR_URL}/receber?name=nome')
+    print(nome)
     print("Mensagens recebidas:")
     for msg in mensagens:
-        print(f"- {msg}")
+        print(f"<{nome}>- {msg}")
 
 def estiliza_texto(texto):
     text = Text(texto)
-    text.stylize("bold white on #054f77")
+    text.stylize(estilo_texto)
     return text
 
 if __name__ == '__main__':
     console.rule("[bold white]CHAT PYTHON")
-    print("\n")
     while True:
-        console.print("1. Enviar mensagem", style="bold white on #054f77", justify="center")
-        console.print("2. Receber mensagens", style="bold white on #054f77", justify="center")
-        console.print("3. Sair", style="bold white on #054f77", justify="center")
+        console.print("1. Enviar mensagem", style=estilo_texto, justify="center")
+        console.print("2. Receber mensagens", style=estilo_texto, justify="center")
+        console.print("3. Sair", style=estilo_texto, justify="center")
         print("\n\n")
         escolha = Prompt.ask(estiliza_texto("Escolha uma opção"))
         
         if escolha == '1':
             enviar_mensagem()
+            os.system('clear')
+            receber_mensagens()
         elif escolha == '2':
             receber_mensagens()
         elif escolha == '3':
