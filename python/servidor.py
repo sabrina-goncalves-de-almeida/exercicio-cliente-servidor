@@ -1,3 +1,7 @@
+# - Exiba na tela cada mensagem recebida
+# - Adicione um número único (id) para cada mensagem
+# - Tenha como parâmetro um valor de mensagem para retornar apenas as mensagens deste id em diante
+
 from flask import Flask, request, jsonify
 
 app = Flask(__name__)
