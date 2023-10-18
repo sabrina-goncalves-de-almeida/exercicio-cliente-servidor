@@ -22,11 +22,9 @@ def enviar_mensagem():
 def receber_mensagens():
     resposta = requests.get(f'{SERVIDOR_URL}/receber')
     mensagens = resposta.json()['mensagens']
-    nome = requests.get(f'{SERVIDOR_URL}/receber?name=nome')
-    print(nome)
     print("Mensagens recebidas:")
     for msg in mensagens:
-        print(f"<{nome}>- {msg}")
+        print(f"- {msg}")
 
 def estiliza_texto(texto):
     text = Text(texto)
