@@ -1,4 +1,4 @@
-# - Adicione a tag <nome> do utilizador em cada mensagem enviada
+# OK- Adicione a tag <nome> do utilizador em cada mensagem enviada
 # OK - Uma opção para sair do programa
 # OK - Após enviar a mensagem automaticamente limpar a tela e exibir toda a conversa novamente
 
