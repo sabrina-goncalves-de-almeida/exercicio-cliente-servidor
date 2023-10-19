@@ -8,16 +8,16 @@ app = Flask(__name__)
 
 mensagens = []
 
-@app.route('/enviar', methods=['POST'])
-def enviar():
+@app.route('/enviar/<nome>', methods=['POST'])
+def enviar(nome):
     msg = request.json.get('mensagem')
     if msg:
-        mensagens.append(msg)
+        mensagens.append([nome,msg])
         return jsonify({'status': 'Mensagem enviada'}), 200
     return jsonify({'status': 'Erro ao enviar mensagem'}), 400
 
-@app.route('/receber', methods=['GET'])
-def receber():
+@app.route('/receber/<nome>', methods=['GET'])
+def receber(nome):
     return jsonify({'mensagens': mensagens})
 
 if __name__ == '__main__':

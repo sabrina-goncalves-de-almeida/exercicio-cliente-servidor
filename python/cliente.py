@@ -14,17 +14,21 @@ SERVIDOR_URL = 'http://127.0.0.1:5555'
 
 estilo_texto = "bold white on #054f77"
 
-def enviar_mensagem():
+def salva_nome_do_ususario():
+    nome = Prompt.ask(estiliza_texto("Qual é o seu nome?"))
+    return nome
+
+def enviar_mensagem(nome):
     msg = Prompt.ask(estiliza_texto("Digite sua mensagem"))
-    resposta = requests.post(f'{SERVIDOR_URL}/enviar', json={'mensagem': msg})
+    resposta = requests.post(f'{SERVIDOR_URL}/enviar/{nome}', json={'nome': nome,'mensagem': msg})
     print(resposta.json()['status'])
 
-def receber_mensagens():
-    resposta = requests.get(f'{SERVIDOR_URL}/receber')
+def receber_mensagens(nome):
+    resposta = requests.get(f'{SERVIDOR_URL}/receber/{nome}')
     mensagens = resposta.json()['mensagens']
     print("Mensagens recebidas:")
     for msg in mensagens:
-        print(f"- {msg}")
+        print(f"<{msg[0]}>- {msg[1]}")
 
 def estiliza_texto(texto):
     text = Text(texto)
@@ -33,6 +37,9 @@ def estiliza_texto(texto):
 
 if __name__ == '__main__':
     console.rule("[bold white]CHAT PYTHON")
+    print("\n")
+    nome = salva_nome_do_ususario()
+    print("\n")
     while True:
         console.print("1. Enviar mensagem", style=estilo_texto, justify="center")
         console.print("2. Receber mensagens", style=estilo_texto, justify="center")
@@ -41,11 +48,11 @@ if __name__ == '__main__':
         escolha = Prompt.ask(estiliza_texto("Escolha uma opção"))
         
         if escolha == '1':
-            enviar_mensagem()
+            enviar_mensagem(nome)
             os.system('clear')
-            receber_mensagens()
+            receber_mensagens(nome)
         elif escolha == '2':
-            receber_mensagens()
+            receber_mensagens(nome)
         elif escolha == '3':
             print("\n")
             console.rule("[bold white]Até mais, tenha um ótimo dia.")
